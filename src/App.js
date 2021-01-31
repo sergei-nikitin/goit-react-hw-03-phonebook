@@ -10,7 +10,7 @@ class App extends Component {
     filter: "",
   };
 
-  changefilter = (filter) => {
+  changeFilter = (filter) => {
     this.setState({ filter });
   };
 
@@ -53,10 +53,6 @@ class App extends Component {
     }));
   };
 
-  changeFilter = (filter) => {
-    this.setState({ filter });
-  };
-
   componentDidMount() {
     const contacts = localStorage.getItem("contacts");
     const parseContacts = JSON.parse(contacts);
@@ -78,26 +74,15 @@ class App extends Component {
       <div>
         <Form onAddContact={this.addContact} />
 
-        {visibleContact.length > 1 ? (
-          <div>
-            <Filter
-              value={this.state.filter}
-              onChangeFilter={this.changeFilter}
-            />
-          </div>
-        ) : (
-          <div></div>
-        )}
+        <Filter value={this.state.filter} onChangeFilter={this.changeFilter} />
 
-        {this.state.contacts.length > 0 ? (
+        {this.state.contacts.length > 0 && (
           <div>
             <ContactList
               contacts={visibleContact}
               onDeleteContact={this.deleteContact}
             />
           </div>
-        ) : (
-          <div></div>
         )}
       </div>
     );
